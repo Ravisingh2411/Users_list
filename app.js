@@ -22,17 +22,16 @@ app.get("/edit/:id", async (req, res) => {
     res.render("edit", {users});
 })
 
-app.post("/update/:id", async (req, res) => {
-    let {name, email, image} = req.body;
-    let users = await userModel.findOneAndUpdate({_id: req.params.id}, {name, email, image}, {new: true});
-    res.redirect("/read");
-})
-
 app.get("/delete/:id", async (req, res) => {
     let users = await userModel.findOneAndDelete({_id: req.params.id});
     res.redirect("/read");
 })
 
+app.post("/update/:id", async (req, res) => {
+    let {name, email, image} = req.body;
+    let users = await userModel.findOneAndUpdate({_id: req.params.id}, {name, email, image}, {new: true});
+    res.redirect("/read");
+})
 
 app.post("/create", async (req, res) => {
     let {name, email, image} = req.body;
